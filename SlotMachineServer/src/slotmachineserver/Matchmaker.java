@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,6 +23,7 @@ public class Matchmaker {
     
     private ServerSocket serverSocket = null;
     private List<Client> connections = new ArrayList<>();
+    private Map<String, Client> openHosts = new HashMap<>();
     
     public Matchmaker(){
         try {
@@ -30,6 +33,20 @@ public class Matchmaker {
         } catch (IOException ex) {
             Logger.getLogger(Matchmaker.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void addHost(Client c, String name){
+        openHosts.put(name, c);
+    }
+    
+    public NetData getHostNames(){
+        NetData n = new NetData(NetType.CurrentHosts);
+        List<String> names = new ArrayList<>();
+        for(String name : openHosts.keySet()){
+            names.add(name);
+        }
+        n.setStringList(names);
+        return n;
     }
     
     private void lookForConnections(){

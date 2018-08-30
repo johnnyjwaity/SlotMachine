@@ -29,14 +29,18 @@ public class Client{
     }
 
     
-    public void sendMessage(String msg){
+    public void sendMessage(NetData d){
         try {
             ObjectOutputStream out = new ObjectOutputStream(s.getOutputStream());
-            out.writeUTF(msg);
+            out.writeObject(d);
             out.flush();
         } catch (IOException ex) {
             System.out.println(ex.getLocalizedMessage());
         }
+    }
+    
+    public void proccessMessage(NetData n){
+        System.out.println(n.getType());
     }
     
     
@@ -62,12 +66,13 @@ class Listener implements Runnable{
         try {
             while(true){
                 ObjectInputStream stream = new ObjectInputStream(s.getInputStream());
-                String input = stream.readUTF();
-                System.out.println(input);
-                c.sendMessage(input);
+                NetData input = (NetData) stream.readObject();
+                c.proccessMessage(input);
             }
         } catch (IOException ex) {
             
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Listener.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
