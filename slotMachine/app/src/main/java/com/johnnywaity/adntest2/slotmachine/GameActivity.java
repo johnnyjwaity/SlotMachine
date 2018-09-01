@@ -1,6 +1,9 @@
 package com.johnnywaity.adntest2.slotmachine;
 
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.CountDownTimer;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.GestureDetector;
@@ -13,23 +16,61 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class GameActivity extends AppCompatActivity implements OnGestureListener {
 
     GestureDetector gestureDetector;
 //test comment
 
+//    final ImageView lever = (ImageView) findViewById(R.id.imageView);
+//    final ImageView topslot1 = (ImageView) findViewById(R.id.topslot1);
+//    final ImageView topslot2 = (ImageView) findViewById(R.id.topslot2);
+//    final ImageView topslot3 = (ImageView) findViewById(R.id.topslot3);
+//    final ImageView midslot1 = (ImageView) findViewById(R.id.midslot1);
+//    final ImageView midslot2 = (ImageView) findViewById(R.id.midslot2);
+//    final ImageView midslot3 = (ImageView) findViewById(R.id.midslot3);
+//    final ImageView botslot1 = (ImageView) findViewById(R.id.botslot1);
+//    final ImageView botslot2 = (ImageView) findViewById(R.id.botslot2);
+//    final ImageView botslot3 = (ImageView) findViewById(R.id.botslot3);
+    private ArrayList<Integer> imgArray = new ArrayList<>();
+
+    private void scrollImages(int res1,int res2, int res3){
+
+    }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        imgArray.add(R.drawable.img1);
+        imgArray.add(R.drawable.img2);
+        imgArray.add(R.drawable.img3);
+        imgArray.add(R.drawable.img4);
+        imgArray.add(R.drawable.img5);
+        imgArray.add(R.drawable.img6);
+
+        System.out.println(imgArray);
+
+        final ImageView lever = (ImageView) findViewById(R.id.imageView);
+        final ImageView topslot1 = (ImageView) findViewById(R.id.topslot1);
+        final ImageView topslot2 = (ImageView) findViewById(R.id.topslot2);
+        final ImageView topslot3 = (ImageView) findViewById(R.id.topslot3);
+        final ImageView midslot1 = (ImageView) findViewById(R.id.midslot1);
+        final ImageView midslot2 = (ImageView) findViewById(R.id.midslot2);
+        final ImageView midslot3 = (ImageView) findViewById(R.id.midslot3);
+        final ImageView botslot1 = (ImageView) findViewById(R.id.botslot1);
+        final ImageView botslot2 = (ImageView) findViewById(R.id.botslot2);
+        final ImageView botslot3 = (ImageView) findViewById(R.id.botslot3);
+
+//        topslot1.setImageDrawable(imgArray.get(0));
 
 
 
         gestureDetector = new GestureDetector(GameActivity.this, GameActivity.this);
 
-        final ImageView lever = (ImageView) findViewById(R.id.imageView);
+
 
 //        final TextView text = (TextView)findViewById(R.id.text);
 //
