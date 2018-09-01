@@ -23,7 +23,7 @@ public class Matchmaker {
     
     private ServerSocket serverSocket = null;
     private List<Client> connections = new ArrayList<>();
-    private Map<String, Client> openHosts = new HashMap<>();
+    private List<Game> games = new ArrayList<>();
     
     public Matchmaker(){
         try {
@@ -35,25 +35,18 @@ public class Matchmaker {
         }
     }
     
-    public void addHost(Client c, String name){
-        openHosts.put(name, c);
+    public int addHost(Client c){
+        games.add(new Game(c, games.size()));
+        return games.size() - 1;
     }
     
-    public NetData getHostNames(){
-        NetData n = new NetData(NetType.CurrentHosts);
-        List<String> names = new ArrayList<>();
-        for(String name : openHosts.keySet()){
-            names.add(name);
-        }
-        n.setStringList(names);
-        return n;
-    }
+    
     
     private void lookForConnections(){
         while(true){
             try {
                 Socket s = serverSocket.accept();
-                Client c = new Client(s);
+                Client c = new Client(s, this);
                 connections.add(c);
                 System.out.println("Connected");
             } catch (IOException ex) {

@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                intent.putExtra("s", 0);
                 startActivity(intent);
             }
         });
@@ -31,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, multiplayer.class);
+                Intent intent = new Intent(MainActivity.this, MultiConfigActivity.class);
+                intent.putExtra("m", 1);
                 startActivity(intent);
             }
         });

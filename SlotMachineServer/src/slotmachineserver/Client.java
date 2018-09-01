@@ -20,10 +20,12 @@ public class Client{
     
     private Socket s;
     private Listener listener;
+    private Matchmaker m;
     
-    public Client(Socket s){
+    public Client(Socket s, Matchmaker m){
         listener = new Listener(s, this);
         this.s = s;
+        this.m = m;
         Thread t = new Thread(listener);
         t.start();
     }
@@ -40,7 +42,13 @@ public class Client{
     }
     
     public void proccessMessage(NetData n){
-        System.out.println(n.getType());
+        switch(n.getType()){
+            case Host:
+                int id = m.addHost(this);
+                NetData d = new NetData(NetType.Host);
+                d.setiData(id);
+                sendMessage(d);
+        }
     }
     
     

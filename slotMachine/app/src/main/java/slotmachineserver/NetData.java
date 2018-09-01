@@ -20,7 +20,7 @@ public class NetData implements Serializable {
     public NetData(NetType t) {
         this.t = t;
     }
-    
+
     public void setStringList(List<String> sL){
         stringList = sL;
     }
@@ -36,11 +36,11 @@ public class NetData implements Serializable {
     public void setiData(int iData) {
         this.iData = iData;
     }
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
 }
 
