@@ -16,7 +16,7 @@ import android.widget.Toast;
 public class GameActivity extends AppCompatActivity implements OnGestureListener {
 
     GestureDetector gestureDetector;
-
+//test comment
 
 
 
