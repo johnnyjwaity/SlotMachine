@@ -3,30 +3,19 @@ package com.johnnywaity.adntest2.slotmachine;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
-import android.view.GestureDetector;
-import android.view.GestureDetector.OnGestureListener;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.Animation;
-import android.view.animation.RotateAnimation;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import network.HostMessageDelegate;
+import network.NetworkDelegate;
 import network.Network;
 import slotmachineserver.NetData;
 import slotmachineserver.NetType;
 
-public class MultiConfigActivity extends AppCompatActivity implements HostMessageDelegate {
+public class MultiConfigActivity extends AppCompatActivity implements NetworkDelegate {
 
 
 
@@ -37,7 +26,7 @@ public class MultiConfigActivity extends AppCompatActivity implements HostMessag
         setContentView(R.layout.activity_multi_config);
 
         Network n = new Network("10.0.0.4", 666);
-        n.setHostDelegate(this);
+        n.setNetworkDelegate(this);
         Thread t = new Thread(n);
         t.start();
 
@@ -84,7 +73,7 @@ public class MultiConfigActivity extends AppCompatActivity implements HostMessag
 
 
     @Override
-    public void onMessage(NetData n) {
+    public void onHostMessage(NetData n) {
         final NetData d = n;
         runOnUiThread(new Runnable() {
             @Override

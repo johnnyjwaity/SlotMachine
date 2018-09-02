@@ -15,7 +15,7 @@ public class Network implements Runnable {
     private Socket s;
     private Listener listener;
 
-    private HostMessageDelegate hostDelegate;
+    private NetworkDelegate networkDelegate;
 
     public static Network sharedInstance;
 
@@ -34,10 +34,15 @@ public class Network implements Runnable {
 
     public void interpretData(NetData d){
         if(d.getType() == NetType.Host){
-            if(hostDelegate != null){
-                hostDelegate.onMessage(d);
+            if(networkDelegate != null){
+                networkDelegate.onHostMessage(d);
             }
         }
+        else if (d.getType() != NetType.Join) {
+            return;
+        }
+
+
     }
 
 
@@ -55,12 +60,12 @@ public class Network implements Runnable {
     }
 
 
-    public HostMessageDelegate getHostDelegate() {
-        return hostDelegate;
+    public NetworkDelegate getNetworkDelegate() {
+        return networkDelegate;
     }
 
-    public void setHostDelegate(HostMessageDelegate hostDelegate) {
-        this.hostDelegate = hostDelegate;
+    public void setNetworkDelegate(NetworkDelegate networkDelegate) {
+        this.networkDelegate = networkDelegate;
     }
 }
 

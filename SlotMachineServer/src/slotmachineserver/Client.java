@@ -21,6 +21,7 @@ public class Client{
     private Socket s;
     private Listener listener;
     private Matchmaker m;
+    private Game myGame;
     
     public Client(Socket s, Matchmaker m){
         listener = new Listener(s, this);
@@ -48,8 +49,22 @@ public class Client{
                 NetData d = new NetData(NetType.Host);
                 d.setiData(id);
                 sendMessage(d);
+                break;
+            case Join:
+                Game g = m.findOpenGame(n.getiData());
+                if(g != null){
+                    g.addClient(this);
+                    NetData j = new NetData(NetType.Join);
+                    j.setiData(1);
+                    sendMessage(j);
+                }
         }
     }
+
+    public void setMyGame(Game myGame) {
+        this.myGame = myGame;
+    }
+    
     
     
 }

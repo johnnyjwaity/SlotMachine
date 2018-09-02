@@ -40,7 +40,14 @@ public class Matchmaker {
         return games.size() - 1;
     }
     
-    
+    public Game findOpenGame(int id){
+        for (Game g : games){
+            if(g.isOpen() && g.getGameID() == id){
+                return g;
+            }
+        }
+        return null;
+    }
     
     private void lookForConnections(){
         while(true){
