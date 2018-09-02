@@ -1,5 +1,7 @@
 package com.johnnywaity.adntest2.slotmachine;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.CountDownTimer;
@@ -22,9 +24,12 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import gameplay.SlotIcons;
+
 public class GameActivity extends AppCompatActivity implements OnGestureListener {
 
     GestureDetector gestureDetector;
+
 //test comment
 
     private ArrayList<Integer> imgArray = new ArrayList<>();
@@ -32,7 +37,9 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
     private boolean killFirstCol = false;
     private boolean killSecondCol = false;
     private boolean killThirdCol = false;
-    private boolean slowDown = false;
+    private boolean slowDownFC = false;
+    private boolean slowDownSC = false;
+    private boolean slowDownTC = false;
     private int imgTime = 100;
 
     private void killFC(){
@@ -47,7 +54,7 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
         killThirdCol = true;
     }
 
-    private void scrollImages() {
+    private void scrollImages(final SlotIcons res1, SlotIcons res2, SlotIcons res3) {
         System.out.println("yo");
 
         final ImageView lever = (ImageView) findViewById(R.id.imageView);
@@ -60,6 +67,9 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
         final ImageView botslot1 = (ImageView) findViewById(R.id.botslot1);
         final ImageView botslot2 = (ImageView) findViewById(R.id.botslot2);
         final ImageView botslot3 = (ImageView) findViewById(R.id.botslot3);
+
+        final float initX = topslot1.getX();
+        final float initY = topslot1.getY();
 
 
         topslot1.post(new Runnable() {
@@ -74,6 +84,41 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
                 if (!killFirstCol){
                     topslot1.postDelayed(this,imgTime);
                 }
+
+
+            }
+        });
+
+        topslot2.post(new Runnable() {
+            int i =2;
+            @Override
+            public void run() {
+                topslot2.setImageResource(imgArray.get(i));
+                i++;
+                if (i>5){
+                    i=0;
+                }
+                if (!killSecondCol){
+                    topslot2.postDelayed(this,imgTime);
+                }
+
+
+            }
+        });
+
+        topslot3.post(new Runnable() {
+            int i =2;
+            @Override
+            public void run() {
+                topslot3.setImageResource(imgArray.get(i));
+                i++;
+                if (i>5){
+                    i=0;
+                }
+                if (!killThirdCol){
+                    topslot3.postDelayed(this,imgTime);
+                }
+
 
             }
         });
@@ -90,10 +135,54 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
                 if(!killFirstCol){
                     midslot1.postDelayed(this,imgTime);
                 }
-                if (slowDown){
+                if (slowDownFC){
+                    imgTime = 500;
+                    if (i==5){
+                        killFC();
+                    }
+                }
+
+            }
+        });
+
+        midslot2.post(new Runnable() {
+            int i =1;
+            @Override
+            public void run() {
+                midslot2.setImageResource(imgArray.get(i));
+                i++;
+                if (i>5){
+                    i=0;
+                }
+                if(!killSecondCol){
+                    midslot2.postDelayed(this,imgTime);
+                }
+                if (slowDownSC){
                     imgTime = 500;
                     if (i==2){
-                        killFC();
+                        killSC();
+                    }
+                }
+
+            }
+        });
+
+        midslot3.post(new Runnable() {
+            int i =1;
+            @Override
+            public void run() {
+                midslot3.setImageResource(imgArray.get(i));
+                i++;
+                if (i>5){
+                    i=0;
+                }
+                if(!killThirdCol){
+                    midslot3.postDelayed(this,imgTime);
+                }
+                if (slowDownTC){
+                    imgTime = 500;
+                    if (i==3){
+                        killTC();
                     }
                 }
 
@@ -116,6 +205,38 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
             }
         });
 
+        botslot2.post(new Runnable() {
+            int i =0;
+            @Override
+            public void run() {
+                botslot2.setImageResource(imgArray.get(i));
+                i++;
+                if (i>5){
+                    i=0;
+                }
+                if (!killSecondCol){
+                    botslot2.postDelayed(this,imgTime);
+                }
+
+            }
+        });
+
+        botslot3.post(new Runnable() {
+            int i =0;
+            @Override
+            public void run() {
+                botslot3.setImageResource(imgArray.get(i));
+                i++;
+                if (i>5){
+                    i=0;
+                }
+                if (!killThirdCol){
+                    botslot3.postDelayed(this,imgTime);
+                }
+
+            }
+        });
+
         new CountDownTimer(5000, 1000) {
 
             public void onTick(long millisUntilFinished) {
@@ -123,7 +244,29 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
             }
 
             public void onFinish() {
-                slowDown = true;
+                slowDownFC = true;
+            }
+        }.start();
+
+        new CountDownTimer(7000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            public void onFinish() {
+                slowDownSC = true;
+            }
+        }.start();
+
+        new CountDownTimer(9000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            public void onFinish() {
+                slowDownTC = true;
             }
         }.start();
 
@@ -137,7 +280,7 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
         activatebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                scrollImages();
+                scrollImages(SlotIcons.Bar, SlotIcons.Bell,SlotIcons.Bell);
             }
         });
     }
