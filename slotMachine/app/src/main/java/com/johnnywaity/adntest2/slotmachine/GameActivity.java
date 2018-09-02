@@ -57,7 +57,7 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
     private void scrollImages(final SlotIcons res1, SlotIcons res2, SlotIcons res3) {
         System.out.println("yo");
 
-        final ImageView lever = (ImageView) findViewById(R.id.imageView);
+        final ImageView lever = (ImageView) findViewById(R.id.lever);
         final ImageView topslot1 = (ImageView) findViewById(R.id.topslot1);
         final ImageView topslot2 = (ImageView) findViewById(R.id.topslot2);
         final ImageView topslot3 = (ImageView) findViewById(R.id.topslot3);
@@ -297,7 +297,7 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
         imgArray.add(R.drawable.img5);
         imgArray.add(R.drawable.img6);
 
-        final ImageView lever = (ImageView) findViewById(R.id.imageView);
+        final ImageView lever = (ImageView) findViewById(R.id.lever);
         final ImageView topslot1 = (ImageView) findViewById(R.id.topslot1);
         final ImageView topslot2 = (ImageView) findViewById(R.id.topslot2);
         final ImageView topslot3 = (ImageView) findViewById(R.id.topslot3);
@@ -409,14 +409,12 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
             Toast.makeText(GameActivity.this, "You Swiped up!", Toast.LENGTH_LONG).show();
             return true;
         }
-        final ImageView lever = (ImageView) findViewById(R.id.imageView);
+        final ImageView lever = (ImageView) findViewById(R.id.lever);
 
         final TextView text = (TextView)findViewById(R.id.text);
         if (motionEvent2.getY() - motionEvent1.getY() > 50) {
-        if (motionEvent1.getY() >= lever.getY()
-            && motionEvent1.getY() <= lever.getHeight()
-            && motionEvent1.getX() >= lever.getX()
-            && motionEvent2.getX() <= lever.getWidth()){
+        if (motionEvent1.getY() >= lever.getY() && motionEvent1.getY() <= lever.getY() + lever.getHeight() && motionEvent1.getX() >= lever.getX() && motionEvent2.getX() <= lever.getX() + lever.getWidth()){
+//            Toast.makeText(GameActivity.this, "You Swiped Down!", Toast.LENGTH_LONG).show();
             //if (motionEvent2.getY() <= lever.getHeight()){
                 //if (motionEvent1.getY() >= lever.getY()){
                     //&& motionEvent2.getY() <= lever.getHeight()){
@@ -461,7 +459,7 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
                 //
             }
 
-            //Toast.makeText(GameActivity.this, "You Swiped Down!", Toast.LENGTH_LONG).show();
+            Toast.makeText(GameActivity.this, "You Swiped Down!", Toast.LENGTH_LONG).show();
             return true;
         }
 
