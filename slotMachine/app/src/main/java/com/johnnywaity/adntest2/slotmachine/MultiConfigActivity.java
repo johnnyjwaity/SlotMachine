@@ -1,14 +1,17 @@
 package com.johnnywaity.adntest2.slotmachine;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import network.NetworkDelegate;
 import network.Network;
@@ -80,7 +83,35 @@ public class MultiConfigActivity extends AppCompatActivity implements NetworkDel
             public void run() {
                 TextView hostCode = findViewById(R.id.hostCodeDisplay);
                 hostCode.setText("Your Host Code Is: " + d.getiData());
-                hostCode.setVisibility(View.VISIBLE);
+                ConstraintLayout alertBox = findViewById(R.id.alertBox);
+                alertBox.setVisibility(View.VISIBLE);
+
+                Button join = findViewById(R.id.join);
+                Button host = findViewById(R.id.host);
+                join.setEnabled(false);
+                host.setEnabled(false);
+            }
+        });
+
+    }
+
+    @Override
+    public void onJoinMessage(NetData n){
+        final NetData d = n;
+        final Context c = getBaseContext();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                switch(d.getiData()){
+                    case 0:
+                        Toast t = Toast.makeText(c, "Couldn't Connect", Toast.LENGTH_LONG);
+                        t.show();
+                        break;
+                    case 1:
+                        Toast t1 = Toast.makeText(c, "Connected", Toast.LENGTH_LONG);
+                        t1.show();
+                        break;
+                }
             }
         });
 

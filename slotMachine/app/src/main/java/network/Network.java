@@ -38,8 +38,10 @@ public class Network implements Runnable {
                 networkDelegate.onHostMessage(d);
             }
         }
-        else if (d.getType() != NetType.Join) {
-            return;
+        else if (d.getType() == NetType.Join) {
+            if(networkDelegate != null){
+                networkDelegate.onJoinMessage(d);
+            }
         }
 
 

@@ -58,6 +58,11 @@ public class Client{
                     j.setiData(1);
                     sendMessage(j);
                 }
+                else{
+                    NetData j = new NetData(NetType.Join);
+                    j.setiData(0);
+                    sendMessage(j);
+                }
         }
     }
 
