@@ -346,61 +346,6 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
 
         gestureDetector = new GestureDetector(GameActivity.this, GameActivity.this);
 
-
-
-//        final TextView text = (TextView)findViewById(R.id.text);
-//
-
-//        lever.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-////                if (!leverPulled){
-////                    TranslateAnimation t = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f ,Animation.RELATIVE_TO_PARENT, 600f);
-////                    t.setRepeatCount(0);
-////                    t.setDuration(2500);
-////                    t.getFillBefore();
-////                    t.setFillAfter(true);
-////                    t.setInterpolator(new AccelerateDecelerateInterpolator());
-////                    lever.startAnimation(t);
-////                Animation rotate = new RotateAnimation(0.0f, 90.0f,
-////                        Animation.RELATIVE_TO_SELF, .0f, Animation.RELATIVE_TO_PARENT,
-////                        .5f);
-////                rotate.setRepeatCount(0);
-////                rotate.setDuration(500);
-////                rotate.getFillBefore();
-////                rotate.setFillAfter(true);
-////                rotate.setInterpolator(new AccelerateDecelerateInterpolator());
-////                lever.startAnimation(rotate);
-////
-////                new CountDownTimer(500, 1000) {
-////
-////                    public void onTick(long millisUntilFinished) {
-////                        text.setText("seconds remaining: " + millisUntilFinished / 1000);
-////                    }
-////
-////                    public void onFinish() {
-////                        text.setText("done!");
-////
-////                        Animation rotate = new RotateAnimation(90.0f, 0.0f,
-////                                Animation.RELATIVE_TO_SELF, .0f, Animation.RELATIVE_TO_PARENT,
-////                                .5f);
-////                        rotate.setRepeatCount(0);
-////                        rotate.setDuration(500);
-////
-////                        rotate.setFillAfter(true);
-////                        rotate.setInterpolator(new AccelerateDecelerateInterpolator());
-////                        lever.startAnimation(rotate);
-////
-////                    }
-////                }.start();
-//
-//                leverPulled = true;
-//
-//
-//                Toast.makeText(getApplicationContext(), "You pressed the image", Toast.LENGTH_SHORT).show();
-//            }
-//        });
     }
 
     @Override
@@ -427,7 +372,7 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
 
                 Animation rotate = new RotateAnimation(0.0f, 105.0f,
                         Animation.RELATIVE_TO_SELF, .0f, Animation.RELATIVE_TO_PARENT,
-                        .3f);
+                        .15f);
                 rotate.setRepeatCount(0);
                 rotate.setDuration(500);
                 rotate.getFillBefore();
@@ -446,7 +391,7 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
 
                         Animation rotate = new RotateAnimation(105.0f, 0.0f,
                                 Animation.RELATIVE_TO_SELF, .0f, Animation.RELATIVE_TO_PARENT,
-                                .3f);
+                                .15f);
                         rotate.setRepeatCount(0);
                         rotate.setDuration(500);
 
