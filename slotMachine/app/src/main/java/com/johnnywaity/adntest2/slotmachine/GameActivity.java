@@ -55,7 +55,6 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
     }
 
     private void scrollImages(final SlotIcons res1, SlotIcons res2, SlotIcons res3) {
-        System.out.println("yo");
 
         final ImageView lever = (ImageView) findViewById(R.id.lever);
         final ImageView topslot1 = (ImageView) findViewById(R.id.topslot1);
@@ -274,12 +273,24 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
 
     }
 
+    private void reset(){
+        killFirstCol = false;
+        killSecondCol = false;
+        killThirdCol = false;
+        slowDownFC = false;
+        slowDownSC = false;
+        slowDownTC = false;
+        imgTime = 100;
+
+    }
+
     private void handleActivate(){
         Button activatebtn = (Button) findViewById(R.id.activate);
 
         activatebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                reset();
                 scrollImages(SlotIcons.Bar, SlotIcons.Bell,SlotIcons.Bell);
             }
         });
@@ -350,10 +361,6 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
 
     @Override
     public boolean onFling(MotionEvent motionEvent1, MotionEvent motionEvent2, float X, float Y) {
-        if (motionEvent1.getY() - motionEvent2.getY() > 50) {
-            Toast.makeText(GameActivity.this, "You Swiped up!", Toast.LENGTH_LONG).show();
-            return true;
-        }
         final ImageView lever = (ImageView) findViewById(R.id.lever);
 
         final TextView text = (TextView)findViewById(R.id.text);
@@ -367,8 +374,18 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
                     //&& motionEvent2.getX() <= lever.getWidth()){
                 //
 
-                Toast.makeText(GameActivity.this, "" + lever.getHeight(), Toast.LENGTH_LONG).show();
-                //Toast.makeText(GameActivity.this, "" + motionEvent1.getY(), Toast.LENGTH_LONG).show();
+            new CountDownTimer(500, 1000) {
+
+                public void onTick(long millisUntilFinished) {
+
+                }
+
+                public void onFinish() {
+                    reset();
+                    scrollImages(SlotIcons.Bar,SlotIcons.Bar,SlotIcons.Bar);
+
+                }
+            }.start();
 
                 Animation rotate = new RotateAnimation(0.0f, 105.0f,
                         Animation.RELATIVE_TO_SELF, .0f, Animation.RELATIVE_TO_PARENT,
@@ -404,20 +421,11 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
                 //
             }
 
-            Toast.makeText(GameActivity.this, "You Swiped Down!", Toast.LENGTH_LONG).show();
+
             return true;
         }
 
-        if (motionEvent1.getX() - motionEvent2.getX() > 50) {
-            Toast.makeText(GameActivity.this, "You Swiped Left!", Toast.LENGTH_LONG).show();
-            return true;
-        }
-        if (motionEvent2.getX() - motionEvent1.getX() > 50) {
-            Toast.makeText(GameActivity.this, "You Swiped Right!", Toast.LENGTH_LONG).show();
-            return true;
-        } else {
-            return true;
-        }
+        return true;
     }
 
     @Override
