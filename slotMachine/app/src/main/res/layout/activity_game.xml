@@ -4,49 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#2D3E52"
     tools:context="com.johnnywaity.adntest2.slotmachine.GameActivity">
 
     <ImageView
         android:id="@+id/lever"
-        android:layout_width="90dp"
-        android:layout_height="86dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="86dp"
+        android:layout_height="87dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
         android:contentDescription="@string/desc"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout2"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/lever_clip_art"
         tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="115dp"
-        android:layout_height="123dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginTop="8dp"
-        android:text="Hello"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.535"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/activate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/text"
-        app:layout_constraintHorizontal_bias="0.329"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -54,10 +27,9 @@
         android:layout_height="219dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="28dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.306"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -70,18 +42,21 @@
                 android:id="@+id/topslot1"
                 android:layout_width="match_parent"
                 android:layout_height="74dp"
+                android:background="@android:color/white"
                 app:srcCompat="@drawable/img3" />
 
             <ImageView
                 android:id="@+id/midslot1"
                 android:layout_width="match_parent"
                 android:layout_height="74dp"
+                android:background="@android:color/white"
                 app:srcCompat="@drawable/img2" />
 
             <ImageView
                 android:id="@+id/botslot1"
                 android:layout_width="match_parent"
                 android:layout_height="74dp"
+                android:background="@android:color/white"
                 app:srcCompat="@drawable/img1" />
         </LinearLayout>
 
@@ -94,18 +69,21 @@
                 android:id="@+id/topslot2"
                 android:layout_width="match_parent"
                 android:layout_height="74dp"
+                android:background="@android:color/white"
                 app:srcCompat="@drawable/img3" />
 
             <ImageView
                 android:id="@+id/midslot2"
                 android:layout_width="match_parent"
                 android:layout_height="74dp"
+                android:background="@android:color/white"
                 app:srcCompat="@drawable/img2" />
 
             <ImageView
                 android:id="@+id/botslot2"
                 android:layout_width="match_parent"
                 android:layout_height="74dp"
+                android:background="@android:color/white"
                 app:srcCompat="@drawable/img1" />
         </LinearLayout>
 
@@ -118,20 +96,68 @@
                 android:id="@+id/topslot3"
                 android:layout_width="match_parent"
                 android:layout_height="74dp"
+                android:background="@android:color/white"
                 app:srcCompat="@drawable/img3" />
 
             <ImageView
                 android:id="@+id/midslot3"
                 android:layout_width="match_parent"
                 android:layout_height="74dp"
+                android:background="@android:color/white"
                 app:srcCompat="@drawable/img2" />
 
             <ImageView
                 android:id="@+id/botslot3"
                 android:layout_width="match_parent"
                 android:layout_height="74dp"
+                android:background="@android:color/white"
                 app:srcCompat="@drawable/img1" />
         </LinearLayout>
     </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="282dp"
+        android:layout_height="196dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/holo_red_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+    <TextView
+        android:id="@+id/myScore"
+        android:layout_width="197dp"
+        android:layout_height="23dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="My $: "
+        android:textColor="@android:color/background_light"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/opponentScore"
+        android:layout_width="197dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="68dp"
+        android:text="Opponent $:"
+        android:textColor="@android:color/background_light"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/myScore" />
 
 </android.support.constraint.ConstraintLayout>
