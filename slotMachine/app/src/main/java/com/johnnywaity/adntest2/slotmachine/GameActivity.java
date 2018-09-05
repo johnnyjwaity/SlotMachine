@@ -284,17 +284,7 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
 
     }
 
-    private void handleActivate(){
-        Button activatebtn = (Button) findViewById(R.id.activate);
 
-        activatebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                reset();
-                scrollImages(SlotIcons.Bar, SlotIcons.Bell,SlotIcons.Bell);
-            }
-        });
-    }
 
 
     @Override
@@ -339,7 +329,6 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
 //            }
 //        }
 
-        handleActivate();
 
         for(int i = 0; i<3; i++)
         {
@@ -400,11 +389,11 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
                 new CountDownTimer(500, 1000) {
 
                     public void onTick(long millisUntilFinished) {
-                        text.setText("seconds remaining: " + millisUntilFinished / 1000);
+//                        text.setText("seconds remaining: " + millisUntilFinished / 1000);
                     }
 
                     public void onFinish() {
-                        text.setText("done!");
+//                        text.setText("done!");
 
                         Animation rotate = new RotateAnimation(105.0f, 0.0f,
                                 Animation.RELATIVE_TO_SELF, .0f, Animation.RELATIVE_TO_PARENT,
