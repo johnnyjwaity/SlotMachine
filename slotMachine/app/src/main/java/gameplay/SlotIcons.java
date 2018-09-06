@@ -1,7 +1,6 @@
 package gameplay;
 
 public enum SlotIcons {
-    Lemon,
     Orange,
     Seven,
     Bar,
@@ -22,5 +21,18 @@ public enum SlotIcons {
             case Seven: return 5;
         }
         return -1;
+   }
+
+
+   public static int iconToPayout(SlotIcons icon){
+       switch (icon){
+           case Bar: return -5;
+           case Orange: return 0;
+           case Seven: return 20;
+           case Cherry: return 12;
+           case Bell: return 8;
+           case Grape: return 5;
+       }
+       return -1;
    }
 }
