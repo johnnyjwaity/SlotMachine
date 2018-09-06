@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import gameplay.GamePlay;
 import gameplay.SlotIcons;
 
 public class GameActivity extends AppCompatActivity implements OnGestureListener {
@@ -41,6 +42,9 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
     private boolean slowDownSC = false;
     private boolean slowDownTC = false;
     private int imgTime = 100;
+    private GamePlay g = new GamePlay();
+
+
 
     private void killFC(){
         killFirstCol = true;
@@ -54,7 +58,7 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
         killThirdCol = true;
     }
 
-    private void scrollImages(final SlotIcons res1, SlotIcons res2, SlotIcons res3) {
+    private void scrollImages(final SlotIcons res1, final SlotIcons res2, final SlotIcons res3) {
 
         final ImageView lever = (ImageView) findViewById(R.id.lever);
         final ImageView topslot1 = (ImageView) findViewById(R.id.topslot1);
@@ -136,7 +140,7 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
                 }
                 if (slowDownFC){
                     imgTime = 500;
-                    if (i==5){
+                    if (i==res1.iconToNum(res1)){
                         killFC();
                     }
                 }
@@ -158,7 +162,7 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
                 }
                 if (slowDownSC){
                     imgTime = 500;
-                    if (i==2){
+                    if (i==res2.iconToNum(res2)){
                         killSC();
                     }
                 }
@@ -180,8 +184,10 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
                 }
                 if (slowDownTC){
                     imgTime = 500;
-                    if (i==3){
+                    if (i==res3.iconToNum(res3)){
                         killTC();
+                        TextView score = findViewById(R.id.myScore);
+                        score.setText("My Score: " + g.getLastPayout());
                     }
                 }
 
@@ -371,7 +377,8 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
 
                 public void onFinish() {
                     reset();
-                    scrollImages(SlotIcons.Bar,SlotIcons.Bar,SlotIcons.Bar);
+                    ArrayList<SlotIcons> res = g.roll();
+                    scrollImages(res.get(0),res.get(1),res.get(2));
 
                 }
             }.start();
