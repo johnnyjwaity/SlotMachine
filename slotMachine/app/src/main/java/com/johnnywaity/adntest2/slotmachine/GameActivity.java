@@ -355,13 +355,6 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
         final TextView text = (TextView)findViewById(R.id.text);
         if (motionEvent2.getY() - motionEvent1.getY() > 50) {
         if (motionEvent1.getY() >= lever.getY() && motionEvent1.getY() <= lever.getY() + lever.getHeight() && motionEvent1.getX() >= lever.getX() && motionEvent2.getX() <= lever.getX() + lever.getWidth()){
-//            Toast.makeText(GameActivity.this, "You Swiped Down!", Toast.LENGTH_LONG).show();
-            //if (motionEvent2.getY() <= lever.getHeight()){
-                //if (motionEvent1.getY() >= lever.getY()){
-                    //&& motionEvent2.getY() <= lever.getHeight()){
-                    //&& motionEvent1.getX() >= lever.getX()
-                    //&& motionEvent2.getX() <= lever.getWidth()){
-                //
 
             new CountDownTimer(500, 1000) {
 
@@ -376,6 +369,24 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
                 }
             }.start();
 
+            lever.setEnabled(false);
+
+            new CountDownTimer(9000, 1000) {
+
+                public void onTick(long millisUntilFinished) {
+
+                }
+
+                public void onFinish() {
+                    lever.setEnabled(true);
+                }
+            }.start();
+
+            //Rotation animation
+            //paramters: from degrees, to degrees, x pivot relative to either original picture position or picture at the moment,
+            //  pivot x value (float), y pivot relative to either original picture position or picture at the moment, pivot y value
+            //setFill makes sure that there is no flickering when running two animations one immediately after the other on same picture
+            //setInterpolator creates a physics based animation with follwing pattern, slow-progressively faster-progressively slower
                 Animation rotate = new RotateAnimation(0.0f, 105.0f,
                         Animation.RELATIVE_TO_SELF, .0f, Animation.RELATIVE_TO_PARENT,
                         .15f);
@@ -447,45 +458,6 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
 
     @Override
     public boolean onDown(MotionEvent arg0) {
-        //Toast.makeText(GameActivity.this, "You Swiped TEST!", Toast.LENGTH_LONG).show();
-        //
-//        final ImageView lever = (ImageView) findViewById(R.id.imageView);
-//
-//        final TextView text = (TextView)findViewById(R.id.text);
-//
-//
-//        Animation rotate = new RotateAnimation(0.0f, 90.0f,
-//                Animation.RELATIVE_TO_SELF, .0f, Animation.RELATIVE_TO_PARENT,
-//                .5f);
-//        rotate.setRepeatCount(0);
-//        rotate.setDuration(500);
-//        rotate.getFillBefore();
-//        rotate.setFillAfter(true);
-//        rotate.setInterpolator(new AccelerateDecelerateInterpolator());
-//        lever.startAnimation(rotate);
-//
-//        new CountDownTimer(500, 1000) {
-//
-//            public void onTick(long millisUntilFinished) {
-//                text.setText("seconds remaining: " + millisUntilFinished / 1000);
-//            }
-//
-//            public void onFinish() {
-//                text.setText("done!");
-//
-//                Animation rotate = new RotateAnimation(90.0f, 0.0f,
-//                        Animation.RELATIVE_TO_SELF, .0f, Animation.RELATIVE_TO_PARENT,
-//                        .5f);
-//                rotate.setRepeatCount(0);
-//                rotate.setDuration(500);
-//
-//                rotate.setFillAfter(true);
-//                rotate.setInterpolator(new AccelerateDecelerateInterpolator());
-//                lever.startAnimation(rotate);
-//
-//            }
-//        }.start();
-        //
         return false;
     }
 
