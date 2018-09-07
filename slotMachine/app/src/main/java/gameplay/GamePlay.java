@@ -1,6 +1,8 @@
 package gameplay;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GamePlay {
 
@@ -37,7 +39,38 @@ public class GamePlay {
     }
 
     private void calculatePayout(ArrayList<SlotIcons> results){
-        lastPayout = 0;
+        float score = 0;
+        for(int i = 0; i < 3; i++){
+            score += SlotIcons.iconToPayout(results.get(i));
+        }
+        Map<SlotIcons, Integer> duplicates = new HashMap<>();
+        for(SlotIcons s : results){
+            int currentValue = 0;
+            if(duplicates.containsKey(s)){
+                currentValue += 1;
+            }
+            currentValue ++;
+            duplicates.put(s, currentValue);
+        }
+        boolean addedMultiplier = false;
+        for(SlotIcons s : duplicates.keySet()){
+            if(duplicates.get(s) == 2){
+                score *= 1;
+                addedMultiplier = true;
+            }
+            else if(duplicates.get(s) == 3){
+                score *= 5;
+                addedMultiplier = true;
+            }
+        }
+        if(!addedMultiplier){
+            score *= 0;
+        }
+
+        score *= 100;
+        score = Math.round(score);
+        score /= 100;
+        lastPayout = score;
     }
 
     public float getLastPayout() {
