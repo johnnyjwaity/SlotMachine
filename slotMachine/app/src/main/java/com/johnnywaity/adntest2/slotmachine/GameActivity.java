@@ -31,6 +31,8 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
 
     GestureDetector gestureDetector;
 
+    private boolean isSpinning = false;
+
 //test comment
     private boolean willRotate = true;
     private ArrayList<Integer> imgArray = new ArrayList<>();
@@ -188,6 +190,7 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
                         killTC();
                         TextView score = findViewById(R.id.myScore);
                         score.setText("My Score: " + g.getLastPayout());
+                        isSpinning = false;
                     }
                 }
 
@@ -356,13 +359,18 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
 
     @Override
     public boolean onFling(MotionEvent motionEvent1, MotionEvent motionEvent2, float X, float Y) {
+        if(isSpinning){
+            return true;
+        }
+
+        isSpinning = true;
         final ImageView lever = (ImageView) findViewById(R.id.lever);
         final TextView text = (TextView)findViewById(R.id.text);
 
         if (motionEvent2.getY() - motionEvent1.getY() > 50) {
         if (motionEvent1.getY() >= lever.getY() && motionEvent1.getY() <= lever.getY() + lever.getHeight() && motionEvent1.getX() >= lever.getX() && motionEvent2.getX() <= lever.getX() + lever.getWidth()){
 
-            if (willRotate){
+
                 new CountDownTimer(500, 1000) {
 
                     public void onTick(long millisUntilFinished) {
@@ -415,21 +423,10 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
                     }
                 }.start();
 
-            }
+
                 //
             }
-            new CountDownTimer(9000, 1000) {
 
-                public void onTick(long millisUntilFinished) {
-
-                }
-
-                public void onFinish() {
-                    if (!willRotate){
-                        willRotate = true;
-                    }
-                }
-            }.start();
 
 
             return true;
