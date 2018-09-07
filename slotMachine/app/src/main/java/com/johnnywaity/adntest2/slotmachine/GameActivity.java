@@ -32,7 +32,7 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
     GestureDetector gestureDetector;
 
 //test comment
-
+    private boolean willRotate = true;
     private ArrayList<Integer> imgArray = new ArrayList<>();
     private int[][] dataArray = new int[3][3];
     private boolean killFirstCol = false;
@@ -357,43 +357,31 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
     @Override
     public boolean onFling(MotionEvent motionEvent1, MotionEvent motionEvent2, float X, float Y) {
         final ImageView lever = (ImageView) findViewById(R.id.lever);
-
         final TextView text = (TextView)findViewById(R.id.text);
+
         if (motionEvent2.getY() - motionEvent1.getY() > 50) {
         if (motionEvent1.getY() >= lever.getY() && motionEvent1.getY() <= lever.getY() + lever.getHeight() && motionEvent1.getX() >= lever.getX() && motionEvent2.getX() <= lever.getX() + lever.getWidth()){
 
-            new CountDownTimer(500, 1000) {
+            if (willRotate){
+                new CountDownTimer(500, 1000) {
 
-                public void onTick(long millisUntilFinished) {
+                    public void onTick(long millisUntilFinished) {
 
-                }
+                    }
 
-                public void onFinish() {
-                    reset();
-                    ArrayList<SlotIcons> res = g.roll();
-                    scrollImages(res.get(0),res.get(1),res.get(2));
+                    public void onFinish() {
+                        reset();
+                        ArrayList<SlotIcons> res = g.roll();
+                        scrollImages(res.get(0),res.get(1),res.get(2));
 
-                }
-            }.start();
+                    }
+                }.start();
 
-            lever.setEnabled(false);
-
-            new CountDownTimer(9000, 1000) {
-
-                public void onTick(long millisUntilFinished) {
-
-                }
-
-                public void onFinish() {
-                    lever.setEnabled(true);
-                }
-            }.start();
-
-            //Rotation animation
-            //paramters: from degrees, to degrees, x pivot relative to either original picture position or picture at the moment,
-            //  pivot x value (float), y pivot relative to either original picture position or picture at the moment, pivot y value
-            //setFill makes sure that there is no flickering when running two animations one immediately after the other on same picture
-            //setInterpolator creates a physics based animation with follwing pattern, slow-progressively faster-progressively slower
+                //Rotation animation
+                //paramters: from degrees, to degrees, x pivot relative to either original picture position or picture at the moment,
+                //  pivot x value (float), y pivot relative to either original picture position or picture at the moment, pivot y value
+                //setFill makes sure that there is no flickering when running two animations one immediately after the other on same picture
+                //setInterpolator creates a physics based animation with follwing pattern, slow-progressively faster-progressively slower
                 Animation rotate = new RotateAnimation(0.0f, 105.0f,
                         Animation.RELATIVE_TO_SELF, .0f, Animation.RELATIVE_TO_PARENT,
                         .15f);
@@ -422,11 +410,26 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
                         rotate.setFillAfter(true);
                         rotate.setInterpolator(new AccelerateDecelerateInterpolator());
                         lever.startAnimation(rotate);
+                        willRotate = false;
 
                     }
                 }.start();
+
+            }
                 //
             }
+            new CountDownTimer(9000, 1000) {
+
+                public void onTick(long millisUntilFinished) {
+
+                }
+
+                public void onFinish() {
+                    if (!willRotate){
+                        willRotate = true;
+                    }
+                }
+            }.start();
 
 
             return true;
