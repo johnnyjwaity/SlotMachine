@@ -3,6 +3,7 @@ package com.johnnywaity.adntest2.slotmachine;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -110,10 +111,26 @@ public class MultiConfigActivity extends AppCompatActivity implements NetworkDel
                     case 1:
                         Toast t1 = Toast.makeText(c, "Connected", Toast.LENGTH_LONG);
                         t1.show();
+                        Intent intent = new Intent(MultiConfigActivity.this, GameActivity.class);
+                        startActivity(intent);
                         break;
                 }
             }
         });
 
+    }
+
+    @Override
+    public void onPlayerJoinedMessage(NetData n){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run()
+            {
+                Toast t1 = Toast.makeText(getBaseContext(), "Connected", Toast.LENGTH_LONG);
+                t1.show();
+                Intent t = new Intent(MultiConfigActivity.this, GameActivity.class);
+                startActivity(t);
+            }
+        });
     }
 }

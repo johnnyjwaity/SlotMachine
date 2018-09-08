@@ -13,5 +13,5 @@ package slotmachineserver;
 public enum NetType {
     Host,
     Join,
-    CurrentHosts;
+    PlayerJoined;
 }

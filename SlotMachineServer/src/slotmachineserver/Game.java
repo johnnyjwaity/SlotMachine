@@ -25,6 +25,7 @@ public class Game {
         p2 = c;
         p2.setMyGame(this);
         open = false;
+        p1.sendMessage(new NetData(NetType.PlayerJoined));
     }
 
     public boolean isOpen() {

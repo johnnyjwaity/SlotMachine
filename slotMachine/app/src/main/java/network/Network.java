@@ -43,6 +43,11 @@ public class Network implements Runnable {
                 networkDelegate.onJoinMessage(d);
             }
         }
+        else if(d.getType() == NetType.PlayerJoined){
+            if(networkDelegate != null){
+                networkDelegate.onPlayerJoinedMessage(d);
+            }
+        }
 
 
     }
