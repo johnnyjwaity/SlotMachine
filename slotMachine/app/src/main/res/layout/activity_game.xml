@@ -11,13 +11,16 @@
         android:id="@+id/lever"
         android:layout_width="111dp"
         android:layout_height="96dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="256dp"
+        android:layout_marginStart="256dp"
         android:layout_marginTop="32dp"
         android:contentDescription="@string/desc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.899"
+        android:src="@drawable/lever_clip_art"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
         app:layout_constraintStart_toStartOf="@+id/linearLayout2"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.504"
         app:srcCompat="@drawable/lever_clip_art"
         tools:ignore="MissingConstraints" />
 
@@ -44,6 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="74dp"
                 android:background="@android:color/white"
+                android:src="@drawable/img3"
                 app:srcCompat="@drawable/img3" />
 
             <ImageView
@@ -51,6 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="74dp"
                 android:background="@android:color/white"
+                android:src="@drawable/img2"
                 app:srcCompat="@drawable/img2" />
 
             <ImageView
@@ -58,6 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="74dp"
                 android:background="@android:color/white"
+                android:src="@drawable/img1"
                 app:srcCompat="@drawable/img1" />
         </LinearLayout>
 
@@ -71,6 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="74dp"
                 android:background="@android:color/white"
+                android:src="@drawable/img3"
                 app:srcCompat="@drawable/img3" />
 
             <ImageView
@@ -78,6 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="74dp"
                 android:background="@android:color/white"
+                android:src="@drawable/img2"
                 app:srcCompat="@drawable/img2" />
 
             <ImageView
@@ -85,6 +93,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="74dp"
                 android:background="@android:color/white"
+                android:src="@drawable/img1"
                 app:srcCompat="@drawable/img1" />
         </LinearLayout>
 
@@ -98,6 +107,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="74dp"
                 android:background="@android:color/white"
+                android:src="@drawable/img3"
                 app:srcCompat="@drawable/img3" />
 
             <ImageView
@@ -105,6 +115,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="74dp"
                 android:background="@android:color/white"
+                android:src="@drawable/img2"
                 app:srcCompat="@drawable/img2" />
 
             <ImageView
@@ -112,6 +123,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="74dp"
                 android:background="@android:color/white"
+                android:src="@drawable/img1"
                 app:srcCompat="@drawable/img1" />
         </LinearLayout>
     </LinearLayout>

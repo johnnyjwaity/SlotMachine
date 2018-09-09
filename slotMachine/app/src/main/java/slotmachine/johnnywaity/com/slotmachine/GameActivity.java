@@ -1,33 +1,25 @@
-package com.johnnywaity.adntest2.slotmachine;
+package slotmachine.johnnywaity.com.slotmachine;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.os.CountDownTimer;
-import android.provider.ContactsContract;
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.support.v7.app.AppCompatActivity;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import gameplay.GamePlay;
 import gameplay.SlotIcons;
 
-public class GameActivity extends AppCompatActivity implements OnGestureListener {
+public class GameActivity extends Activity implements OnGestureListener {
 
     GestureDetector gestureDetector;
 
@@ -359,18 +351,20 @@ public class GameActivity extends AppCompatActivity implements OnGestureListener
 
     @Override
     public boolean onFling(MotionEvent motionEvent1, MotionEvent motionEvent2, float X, float Y) {
-        if(isSpinning){
-            return true;
-        }
 
-        isSpinning = true;
+
         final ImageView lever = (ImageView) findViewById(R.id.lever);
-        final TextView text = (TextView)findViewById(R.id.text);
-
+        System.out.println(lever);
         if (motionEvent2.getY() - motionEvent1.getY() > 50) {
-        if (motionEvent1.getY() >= lever.getY() && motionEvent1.getY() <= lever.getY() + lever.getHeight() && motionEvent1.getX() >= lever.getX() && motionEvent2.getX() <= lever.getX() + lever.getWidth()){
+            Toast.makeText(getBaseContext(), "Fling1", Toast.LENGTH_LONG).show();
+        if (motionEvent1.getY() >= lever.getY() && motionEvent1.getY() <= lever.getY() + lever.getHeight() && motionEvent1.getX() >= lever.getX() && motionEvent2.getX() <= lever.getX() + lever.getWidth() || true){
+            if(isSpinning){
+                return true;
+            }
 
+            isSpinning = true;
 
+            Toast.makeText(getBaseContext(), "Fling", Toast.LENGTH_LONG).show();
                 new CountDownTimer(500, 1000) {
 
                     public void onTick(long millisUntilFinished) {

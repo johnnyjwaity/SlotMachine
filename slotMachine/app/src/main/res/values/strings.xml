@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">slot Machine</string>
-    <string name="desc">Image</string>
-    <string name="title_activity_multi_config">MultiConfigActivity</string>
+    <string name="app_name">SlotMachine</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="desc">Description</string>
 </resources>
