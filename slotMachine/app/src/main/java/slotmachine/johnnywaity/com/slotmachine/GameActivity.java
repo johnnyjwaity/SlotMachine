@@ -360,7 +360,7 @@ public class GameActivity extends Activity implements OnGestureListener {
 
     @Override
     public boolean onFling(MotionEvent motionEvent1, MotionEvent motionEvent2, float X, float Y) {
-        if(g.getRollCount() >= 3){
+        if(g.getRollCount() >= 3 && g.isMultiplayer()){
             Toast.makeText(getBaseContext(), "Ran Out Of Rolls", Toast.LENGTH_LONG).show();
             return true;
         }
@@ -379,7 +379,7 @@ public class GameActivity extends Activity implements OnGestureListener {
 
 
 
-            Toast.makeText(getBaseContext(), "Fling", Toast.LENGTH_LONG).show();
+//            Toast.makeText(getBaseContext(), "Fling", Toast.LENGTH_LONG).show();
                 new CountDownTimer(500, 1000) {
 
                     public void onTick(long millisUntilFinished) {

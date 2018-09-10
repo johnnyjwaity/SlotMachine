@@ -104,16 +104,19 @@ public class GamePlay implements BridgeDelegate {
     }
 
     public float getLastPayout() {
-        BTData d = new BTData(BTType.Score);
-        d.setiData(lastPayout);
-        bridge.write(d);
+        if(isMultiplayer){
+            BTData d = new BTData(BTType.Score);
+            d.setiData(lastPayout);
+            bridge.write(d);
 
-        BTData d1 = new BTData(BTType.Roll);
-        d1.setRollData(rollCount);
-        bridge.write(d1);
+            BTData d1 = new BTData(BTType.Roll);
+            d1.setRollData(rollCount);
+            bridge.write(d1);
 
-        activity.updatePlayerRolls(rollCount + "/3");
-        checkForVictory();
+            activity.updatePlayerRolls(rollCount + "/3");
+            checkForVictory();
+        }
+
         return lastPayout;
     }
 
