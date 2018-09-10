@@ -1,14 +1,41 @@
 package gameplay;
 
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GamePlay {
+import bluetooth.BTBridge;
+import bluetooth.BTData;
+import bluetooth.BTType;
+import bluetooth.BridgeDelegate;
+import slotmachine.johnnywaity.com.slotmachine.GameActivity;
+
+public class GamePlay implements BridgeDelegate {
 
     private float lastPayout = 0;
 
+    private boolean isMultiplayer = false;
+    private BTBridge bridge = null;
+
+    private GameActivity activity;
+
+    private int opponentRoll = 0;
+    private float opponentScore = 0;
+
+    private int rollCount = 0;
+
+    public GamePlay(){
+        if(BTBridge.getSharedInstance() != null){
+            isMultiplayer = true;
+            bridge = BTBridge.getSharedInstance();
+            bridge.setDelegate(this);
+        }
+    }
+
     public ArrayList<SlotIcons> roll(){ //payout is the player's bet
+        rollCount++;
         ArrayList<SlotIcons> slotIcons = new ArrayList<>();
         for (int i=0;i<3;i++){
             int chance = 0;
@@ -70,10 +97,75 @@ public class GamePlay {
         score *= 100;
         score = Math.round(score);
         score /= 100;
-        lastPayout = score;
+        lastPayout += score;
+
+
+
     }
 
     public float getLastPayout() {
+        BTData d = new BTData(BTType.Score);
+        d.setiData(lastPayout);
+        bridge.write(d);
+
+        BTData d1 = new BTData(BTType.Roll);
+        d1.setRollData(rollCount);
+        bridge.write(d1);
+
+        activity.updatePlayerRolls(rollCount + "/3");
+        checkForVictory();
         return lastPayout;
+    }
+
+    public boolean isMultiplayer() {
+        return isMultiplayer;
+    }
+
+    public void setActivity(GameActivity activity) {
+        this.activity = activity;
+    }
+
+    public int getRollCount() {
+        return rollCount;
+    }
+
+    private void checkForVictory(){
+        if(rollCount == 3 && opponentRoll == 3){
+            if(lastPayout > opponentScore){
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(activity.getBaseContext(), "You Win", Toast.LENGTH_LONG);
+                    }
+                });
+            }else if(opponentScore > lastPayout){
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(activity.getBaseContext(), "You Lose", Toast.LENGTH_LONG);
+                    }
+                });
+            }else{
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(activity.getBaseContext(), "You Tie", Toast.LENGTH_LONG);
+                    }
+                });
+            }
+
+        }
+    }
+
+    @Override
+    public void onMessage(BTData d) {
+        if(d.getType() == BTType.Score){
+            activity.updateOpponentScore("Opponent Score: " + d.getiData());
+            opponentScore = d.getiData();
+        }else if(d.getType() == BTType.Roll){
+            activity.updateOpponentRolls(d.getRollData() + "/3");
+            opponentRoll = d.getRollData();
+        }
+        checkForVictory();
     }
 }

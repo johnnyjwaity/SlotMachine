@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                Intent intent = new Intent(MainActivity.this, BTConfig.class);
                 startActivity(intent);
             }
         });

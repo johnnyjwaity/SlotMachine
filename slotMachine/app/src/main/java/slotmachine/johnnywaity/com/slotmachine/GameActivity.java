@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
@@ -292,6 +293,14 @@ public class GameActivity extends Activity implements OnGestureListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        if(g.isMultiplayer()){
+            findViewById(R.id.opponentBox).setVisibility(View.VISIBLE);
+            findViewById(R.id.playerRollCount).setVisibility(View.VISIBLE);
+
+        }
+        g.setActivity(this);
+
         imgArray.add(R.drawable.img1);
         imgArray.add(R.drawable.img2);
         imgArray.add(R.drawable.img3);
@@ -351,18 +360,24 @@ public class GameActivity extends Activity implements OnGestureListener {
 
     @Override
     public boolean onFling(MotionEvent motionEvent1, MotionEvent motionEvent2, float X, float Y) {
+        if(g.getRollCount() >= 3){
+            Toast.makeText(getBaseContext(), "Ran Out Of Rolls", Toast.LENGTH_LONG).show();
+            return true;
+        }
 
 
         final ImageView lever = (ImageView) findViewById(R.id.lever);
         System.out.println(lever);
         if (motionEvent2.getY() - motionEvent1.getY() > 50) {
-            Toast.makeText(getBaseContext(), "Fling1", Toast.LENGTH_LONG).show();
+//            Toast.makeText(getBaseContext(), "Fling1", Toast.LENGTH_LONG).show();
         if (motionEvent1.getY() >= lever.getY() && motionEvent1.getY() <= lever.getY() + lever.getHeight() && motionEvent1.getX() >= lever.getX() && motionEvent2.getX() <= lever.getX() + lever.getWidth() || true){
             if(isSpinning){
                 return true;
             }
 
             isSpinning = true;
+
+
 
             Toast.makeText(getBaseContext(), "Fling", Toast.LENGTH_LONG).show();
                 new CountDownTimer(500, 1000) {
@@ -428,6 +443,42 @@ public class GameActivity extends Activity implements OnGestureListener {
 
         return true;
     }
+
+    public void updatePlayerRolls(String txt){
+        final String txt2 = txt;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TextView v = findViewById(R.id.playerRollCount);
+                v.setText(txt2);
+            }
+        });
+
+    }
+    public void updateOpponentRolls(String txt){
+        final String txt2 = txt;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TextView v = findViewById(R.id.opponentRollCount);
+                v.setText(txt2);
+            }
+        });
+
+    }
+    public void updateOpponentScore(String txt){
+        final String txt2 = txt;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TextView v = findViewById(R.id.opponentScore);
+                v.setText(txt2);
+            }
+        });
+
+    }
+
+
 
     @Override
     public void onLongPress(MotionEvent arg0) {
